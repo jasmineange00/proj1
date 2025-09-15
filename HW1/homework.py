@@ -1,32 +1,31 @@
-rows = int(input("Enter row: "))
-cols = int(input("Enter col: "))
-
-matrix = []
+nestedlist = []
+rows = int(input("Enter Number of Rows: "))
+cols = int(input("Enter Number of Columns: "))
 
 for i in range(rows):
-    print("Row", i+1)
-    num1 = float(input("Enter number1: "))
-    num2 = float(input("Enter number2: "))
-    row_dict = {(i, 0): num1, (i, 1): num2}
-    matrix.append(row_dict)
+    print(f"\n- Row {i+1} -")
+    row_values = []
+    for j in range(cols):
+        value = float(input(f"Enter Number {j+1}: "))
+        row_values.append(value)
+    nestedlist.append(row_values)
 
-search_num = float(input("\nSearch: "))
-
-print("\nThe numbers are:\n")
-for i in range(rows):
-    values = [matrix[i][(i, c)] for c in range(cols)]
-    for v in values:
-        print(v, end=" ")
+print("\nThe Numbers are:")
+for i in range(len(nestedlist)):
+    for j in range(len(nestedlist[i])):
+        print(nestedlist[i][j], end=" ")
     print()
 
-positions = []
-for i in range(rows):
-    for c in range(cols):
-        if matrix[i][(i, c)] == search_num:
-            positions.append((i, c))
+search_num = float(input("\nSearch: "))
+found_positions = []
+for i in range(len(nestedlist)):
+    for j in range(len(nestedlist[i])):
+        if nestedlist[i][j] == search_num:
+        
+            found_positions.append(f"Row {i+1}, Col {j+1}")
 
-pos_strings = []
-for pos in positions:
-    pos_strings.append("Row " + str(pos[0]) + ", Col " + str(pos[1]))
-
-print("\nNumber", search_num, "found at", " and ".join(pos_strings))
+if found_positions:
+    message = f"Number {search_num} found at " + " and ".join(found_positions)
+else:
+    message = f"Number {search_num} not found in the matrix."
+print(message)
